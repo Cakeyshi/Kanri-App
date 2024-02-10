@@ -1,0 +1,30 @@
+#addBtn{
+    position: relative;
+    bottom:.5rem;
+}
+
+#addMultipleBtn{
+    position: relative;
+    bottom: .5rem;
+}
+
+#add:disabled{
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+#options{
+    display: flex;
+    gap: 2px;
+
+}
+
+#eye_button_disable{
+    position: relative;
+    bottom: .5rem;
+}
+
+#eye_button_enable{
+    position: relative;
+    bottom: .5rem;
+}

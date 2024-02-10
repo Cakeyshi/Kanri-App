@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../images/kanri_icon.ico">
+    <meta author="mash">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css">
+    <script src="../node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>kanri</title>
+</head>
+<body>
+    <div class="container mt-5" id="container">
+        <div class="card">
+            <div class="card-header">
+                <strong id="dayHeader">My Schedule</strong>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead id="thead">
+                        <tr>
+                            <th scope="col">Subject</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Edp Code</th>
+                            <th scope="col">Room Number</th>
+                            <th scope="col" style="display: none;" id="dayCol">Day</th>
+                            <th scope="col"><!-- delete button --></th>
+                        </tr>
+                        <div class="flex-row" id="options"> 
+                            <button type="button" class="btn btn-light" id="eye_button_disable" title="show all"> 
+                                <img src="../svg_icons/eye-slash-solid.svg" alt="show all" style="width: 20px; height: 20px;">
+                            </button>
+                            <button type="button" class="btn btn-light" id="eye_button_enable" title="show specific day only" style="display: none;"> 
+                                <img src="../svg_icons/eye-solid.svg" alt="show all" style="width: 20px; height: 20px;">
+                            </button>
+                            <button type="button" class="btn btn-light" id="addBtn" title="Add single schedule">
+                                <img src="../svg_icons/square-plus-regular.svg" alt="Calendar Plus Icon" style="width: 20px; height: 20px;">
+                                
+                            </button>
+                            <button type="button" class="btn btn-light" id="addMultipleBtn" title="Add multiple schedule">
+                                <img src="../svg_icons/notes-medical-solid.svg" alt="Multi Icon" style="width: 20px; height: 20px;">
+                                
+                            </button>    
+                        </div>
+                  
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="noclassimg">
+        <!-- no class div -->
+    </div>
+    <!-- Add single sched div-->
+    <div style="display: none;" id="addSched">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="card" style="width: 30rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Add Schedule</h5>
+
+                    <div class="mb-3">  
+                        <label for="day" class="form-label">Set Day:</label>
+                        <select class="form-control" id="day">
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject:</label>
+                        <input type="text" class="form-control" id="subject" required>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label class="form-label">Time:</label>
+                        <div class="input-group">
+                            <input type="time" class="form-control" id="time1" required>
+                            <span class="input-group-text">-</span>
+                            <input type="time" class="form-control" id="time2" required>
+                        </div>
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Edp Code (Optional):</label>
+                        <input type="text" class="form-control" id="edp">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Room Number (Optional):</label>
+                        <input type="text" class="form-control" id="roomNum">
+                    </div>
+        
+        
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit" id="add" disabled>Add Schedule</button>
+                        <button class="btn btn-outline-danger" type="submit" id="cancel">Cancel</button>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add multiple sched div-->
+    <div style="display:none" id="addMultipleSched">
+        <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="card" style="width: 30rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Add Schedule</h5>
+    
+                    <div class="mb-3">  
+                        <label for="day" class="form-label">Set Day:</label>
+                        <select class="form-select" id="multipleDay" multiple="multiple" required>
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject:</label>
+                        <input type="text" class="form-control" id="multiSubject" required>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label class="form-label">Time:</label>
+                        <div class="input-group">
+                            <input type="time" class="form-control" id="multi_time1" required>
+                            <span class="input-group-text">-</span>
+                            <input type="time" class="form-control" id="multi_time2" required>
+                        </div>
+                    </div>
+        
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Edp Code (Optional):</label>
+                        <input type="text" class="form-control" id="multi_edp">
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Room Number (Optional):</label>
+                        <input type="text" class="form-control" id="multi_roomNum">
+                    </div>
+        
+        
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit" id="multi_add" disabled>Add Schedule</button>
+                        <button class="btn btn-outline-danger" type="submit" id="multi_cancel">Cancel</button>
+                    </div>
+    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <div id="popup" class="alert alert-success" role="alert" style="display: none; position: fixed; top: 20px;">
+            Schedule Successfully Added!
+        </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <div id="popupError" class="alert alert-danger" role="alert" style="display: none; position: fixed; top: 20px;">
+            Error Inserting Schedule!
+        </div>
+    </div>
+    <script src="..\node_modules\@popperjs\core\dist\umd\popper.min.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#multipleDay').multiselect();
+        });
+    </script>
+
+</body>
+</html>
