@@ -5,4 +5,4 @@ HTML, CSS, Bootstrap, Jquery, Vanilla JS, and Electron-Forge
 
 This project was also meant to improve my programming skills specifically in  web development and design. 
 
-Feel free to use and improve the files in here!!
+
